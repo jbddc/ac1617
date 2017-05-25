@@ -135,3 +135,11 @@ hist d = "\\begin{array}{ll}\n" ++ (concat $ map histp x) ++ "\\end{array}\n"
                 histp(n,p) = show n ++ " & \\rule{" ++ show p ++ "mm}{3pt}\\ " ++ show p ++"\\%\\\\\n"
 ------------
 kcomp f g a = [(y,q*p) | (x,p) <- g a, (y,q) <- f x]
+
+xpct d p = sum [ x | (b,x) <- a, b==True] where a=unD $ do { a <- d; return(p a) }
+
+(p .&&. q) x = p x && q x
+
+prob delta q p = (xpct delta (q .&&. p)) / (xpct delta p)
+------------
+

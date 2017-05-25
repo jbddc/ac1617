@@ -14,17 +14,6 @@ import System.IO.Unsafe (unsafePerformIO)
 import ListUtils
 import Show
 
---------- jno (to be checked) --------------
-import Control.Applicative
-instance Applicative Dist where
-    pure = return
-    (<*>) = ap
-
-instance Alternative Dist where
-    empty = D []
-    (<|>) = (>>)
---------- end jno --------------------------
-
 {- TO DO:
 
 * create export list
@@ -36,6 +25,17 @@ instance Alternative Dist where
 * prove correctness of |||
 
 -}
+
+--------- jno (to be checked) --------------
+import Control.Applicative
+instance Applicative Dist where
+    pure = return
+    (<*>) = ap
+
+instance Alternative Dist where
+    empty = D []
+    (<|>) = (>>)
+--------- end jno --------------------------
 
 
 ------------------------------------------------------------------------------
