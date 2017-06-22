@@ -1,7 +1,13 @@
-\documentstyle{article}
+\documentclass[a4paper]{article}
+\usepackage[a4paper,left=3cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{palatino}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage{graphicx}
+%include polycode.fmt
+%include tp3.sty
 \begin{document}
 
-\section{}
+\section{Hello}
 
 \begin{code}
 import Cp
