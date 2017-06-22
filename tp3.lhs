@@ -149,7 +149,9 @@ queue = sum3 enq' deq' peek'
 
 \section{Faulty \textit{Queue}}
 
-
+Considerando como ponto de partida a \textit{stack probabilística} das aulas,
+foi construída a \textit{faulty queue} através da introdução de probabilidades de sucesso 
+nos métodos que constituem a \textit{queue} apresentada acima:
 
 \begin{code}
 
@@ -168,17 +170,22 @@ queue_p p q = sum2 (enq'' p) (deq'' q)
 \section{Testes e Resultados}
 
 Segue-se um teste que testa o funcionamento da \textit{Faulty Queue}, utilizando outra
-função desenvolvida nas aulas, /textit{toSMT}.
+função desenvolvida nas aulas, \textit{toSMT}.
 
 \begin{code}
 toSMT m = SMT . (curry(fmap swap . m . swap))
 
-t'' = do { x<- toSMT(peek'' 0.8) () ; y <- toSMT(deq'' 0.9) () ; toSMT(enq'' 0.6) (x+y) ; toSMT (deq'' 0.7) ()}
+t'' = do 
+      x<- toSMT(peek'' 0.8) () 
+      y <- toSMT(deq'' 0.9) () 
+      toSMT(enq'' 0.6) (x+y) 
+      toSMT (deq'' 0.7) ()
 \end{code}
 
 O resultado obtido, para a execução apresentada, foi o seguinte:
+
 \begin{spec}
-> runSMT t'' ([1,2,3],[4,5,6])
+$ runSMT t'' ([1,2,3],[4,5,6])
 
 Just 2  90.0%
 Just 1  10.0%
