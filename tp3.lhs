@@ -193,7 +193,7 @@ Just 1  10.0%
 \end{spec}
 
 
-Podemos conclurir que, na nossa implementação pelo menos, não será possível obter dados sobre a realização
+Podemos concluir que, na nossa implementação pelo menos, não será possível obter dados sobre a realização
 de \textit{flush} pois trata-se de um método interno da máquina.
 
 \end{document}
