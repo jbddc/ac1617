@@ -37,7 +37,7 @@
 
 \section{Dependências}
 
-\hspace{4mm} Inicialmente são feitos os \textit{imports} das bibliotecas fornecidas na página da disciplina, 
+\hspace{4mm} Inicialmente são feitos os \textit{imports} das bibliotecas fornecidas na página da disciplina,
 necessárias para desenvolver o trabalho prático.
 
 \begin{code}
@@ -61,7 +61,7 @@ top = head
 empty = (0==).length
 \end{code}
 
-Também as respectivas \textit{"totalizações"} das funções apresentadas acima foram adoptadas neste projeto,
+Também as respectivas \textit{"totalizações"} das funções apresentadas acima foram adotadas neste projeto,
 pois irão ser necessárias mais à frente.
 
 \begin{code}
@@ -110,9 +110,9 @@ Posteriormente, partiu-se para a extensão destas funções para terem o comport
 Tanto a função \textit{enqueue}, como a função \textit{peek}, não sofreram quaisquer alterações
 pois já tinham o comportamento desejado.
 
-No entanto, a função \textit{flush} teve de ser extendida para apenas realizar a acção de \textit{flushing}
+No entanto, a função \textit{flush} teve de ser extendida para apenas realizar a ação de \textit{flushing}
 quando a \textit{stack} de \textit{dequeues} estiver vazia. Desta forma, o \textit{flush} não é realizado
-desnecessáriamente quando a \textit{stack} em questão tem elementos que podem ser retirados.
+desnecessariamente quando a \textit{stack} em questão tem elementos que podem ser retirados.
 
 \begin{code}
 
@@ -136,7 +136,7 @@ deq' = mult . tot (deq .! flush')  (not . uncurry (&&) . (empty >< empty) . p1)
 \end{code}
 
 Por fim é representada a nossa \textit{queue}, expondo os métodos que esta disponibiliza através da
-função \textit{sum3} (de salientar que o flush não é exposto para o utilizador, tratando-se de uma 
+função \textit{sum3} (de salientar que o flush não é exposto para o utilizador, tratando-se de uma
 operação intermédia interna da máquina) :
 
 \begin{code}
@@ -150,7 +150,7 @@ queue = sum3 enq' deq' peek'
 \section{Faulty \textit{Queue}}
 
 Considerando como ponto de partida a \textit{stack probabilística} das aulas,
-foi construída a \textit{faulty queue} através da introdução de probabilidades de sucesso 
+foi construída a \textit{faulty queue} através da introdução de probabilidades de sucesso
 nos métodos que constituem a \textit{queue} apresentada acima:
 
 \begin{code}
@@ -169,16 +169,16 @@ queue_p p q = sum2 (enq'' p) (deq'' q)
 
 \section{Testes e Resultados}
 
-Segue-se um teste que testa o funcionamento da \textit{Faulty Queue}, utilizando outra
+Segue-se um teste que avalia o funcionamento da \textit{Faulty Queue}, utilizando outra
 função desenvolvida nas aulas, \textit{toSMT}.
 
 \begin{code}
 toSMT m = SMT . (curry(fmap swap . m . swap))
 
-t'' = do 
-      x<- toSMT(peek'' 0.8) () 
-      y <- toSMT(deq'' 0.9) () 
-      toSMT(enq'' 0.6) (x+y) 
+t'' = do
+      x<- toSMT(peek'' 0.8) ()
+      y <- toSMT(deq'' 0.9) ()
+      toSMT(enq'' 0.6) (x+y)
       toSMT (deq'' 0.7) ()
 \end{code}
 
@@ -193,7 +193,7 @@ Just 1  10.0%
 \end{spec}
 
 
-Podemos concluír que, na nossa implementação pelo menos, não será possível obter dados sobre a realização
+Podemos conclurir que, na nossa implementação pelo menos, não será possível obter dados sobre a realização
 de \textit{flush} pois trata-se de um método interno da máquina.
 
 \end{document}
