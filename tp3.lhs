@@ -41,11 +41,11 @@ enq = extl push'
 
 deq = extr pop'
 
-deq' = tot aux (uncurry (||) . (not . empty >< not . empty)) . p1
-    where 
-        aux ([], l)  = ((tail l, []), head l)
-        aux (l1, l2) = ((tail l1, l2), head l1)
-        deq'' = tot (split (split ((tail p1) ++ p2) []) (pop' . p1)) (isNothing . deq)
+flush = split (uncurry (foldl push) . swap . split (reverse . p1) (reverse . p2)) (const [])
+
+flush' = return . (split flush bang)
+
+deq' = mult . tot (deq .! flush') (not . uncurry (&&) . (empty >< empty)) . p1
 
 queue = sum2 enq deq'
 
