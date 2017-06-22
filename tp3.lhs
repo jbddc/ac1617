@@ -72,7 +72,9 @@ queue_p p q = sum2 (enq'' p) (deq'' q)
 \end{code}
 
 \begin{code}
-tests = error "TODO"
+toSMT m = SMT . (curry(fmap swap . m . swap))
+
+t'' = do { x<- toSMT(peek'' 0.8) () ; y <- toSMT(deq'' 0.9) () ; toSMT(enq'' 0.6) (x+y) ; toSMT (deq'' 0.7) ()}
 \end{code}
 
 
