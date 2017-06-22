@@ -41,13 +41,33 @@ enq = extl push'
 
 deq = extr pop'
 
-flush = split (uncurry (foldl push) . swap . split (reverse . p1) (reverse . p2)) (const [])
+peek = extr top'
 
-flush' = return . (split flush bang)
+enq' = enq
 
-deq' = mult . tot (deq .! flush') (not . uncurry (&&) . (empty >< empty)) . p1
+peek' = peek
 
-queue = sum2 enq deq'
+flush = split (uncurry (foldl push) . swap . (reverse >< reverse)) (const [])
+
+flush' = return . split (Cp.cond (empty . p1) flush id) bang . p1
+
+deq' = mult . tot (deq .! flush')  (not . uncurry (&&) . (empty >< empty) . p1)
+
+queue = sum3 enq' deq' peek'
+
+\end{code}
+
+\begin{code}
+
+skip' = return . (id >< bang)
+
+peek'' p = MbT . schoice p peek' peek'
+
+enq'' p = MbT . schoice p enq' skip'
+
+deq'' p = MbT . schoice p deq' peek'
+
+queue_p p q = sum2 (enq'' p) (deq'' q)
 
 \end{code}
 
