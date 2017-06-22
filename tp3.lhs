@@ -37,16 +37,19 @@ stack = sum3 pop' top' push'
 
 \begin{code}
 
-m1 = stack
+enq = extl push'
 
-m2 = stack
+deq = extr pop'
 
-enq' = undefined
+deq' = tot aux (uncurry (||) . (not . empty >< not . empty)) . p1
+    where 
+        aux ([], l)  = ((tail l, []), head l)
+        aux (l1, l2) = ((tail l1, l2), head l1)
+        deq'' = tot (split (split ((tail p1) ++ p2) []) (pop' . p1)) (isNothing . deq)
 
-deq' = undefined
+queue = sum2 enq deq'
 
 \end{code}
-
 
 \begin{code}
 tests = error "TODO"
